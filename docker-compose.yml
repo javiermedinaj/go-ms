@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+
+  order-service:
+    build: ./services/orders
+    depends_on:
+      - rabbitmq
+    ports:
+      - "8081:8000"
+
+  inventory-service:
+    build: ./services/inventory
+    depends_on:
+      - rabbitmq
+    ports:
+      - "8082:8000"
+
+  notification-service:
+    build: ./services/notifications
+    depends_on:
+      - rabbitmq
+    ports:
+      - "8083:8000"
