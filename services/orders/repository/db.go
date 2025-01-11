@@ -19,7 +19,7 @@ var db *sql.DB
 
 func InitDB() *sql.DB {
 	var err error
-	connStr := "host=localhost port=5432 user=postgres password=postgres dbname=ecommerce sslmode=disable"
+	connStr := "host=localhost port=5432 user=postgres password=admin dbname=ecommerce sslmode=disable"
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatalf("Error connecting to the database: %v", err)

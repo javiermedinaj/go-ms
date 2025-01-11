@@ -11,21 +11,27 @@ services:
       RABBITMQ_DEFAULT_PASS: password
 
   order-service:
-    build: ./services/orders
+    build:
+      context: .
+      dockerfile: ./services/orders/Dockerfile
     depends_on:
       - rabbitmq
     ports:
       - "8081:8000"
 
   inventory-service:
-    build: ./services/inventory
+    build:
+      context: .
+      dockerfile: ./services/inventory/Dockerfile
     depends_on:
       - rabbitmq
     ports:
       - "8082:8000"
 
   notification-service:
-    build: ./services/notifications
+    build:
+      context: .
+      dockerfile: ./services/notifications/Dockerfile
     depends_on:
       - rabbitmq
     ports:

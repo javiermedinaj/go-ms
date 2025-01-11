@@ -1,4 +1,3 @@
-// filepath: /C:/Users/Javier/Desktop/ecommerce-system/services/orders/main.go
 package main
 
 import (
@@ -14,7 +13,6 @@ import (
 func main() {
 	db := repository.InitDB()
 
-	// Init messaging
 	messaging.InitRabbitMQ()
 
 	// Configuración del router
