@@ -26,6 +26,11 @@ func main() {
 		handlers.GetOrders(c, db)
 	})
 
+	// health check
+	router.GET("/health", func(c *gin.Context) {
+		c.JSON(200, gin.H{"status": "ok"})
+	})
+
 	// Iniciar el servidor
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":8000", router))
 }

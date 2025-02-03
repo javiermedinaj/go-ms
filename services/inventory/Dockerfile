@@ -1,16 +1,20 @@
-FROM golang:1.20
+FROM golang:1.23
 
 WORKDIR /app
 
-# Copiar y descargar dependencias
+# Copiar go.mod y go.sum desde la raíz del proyecto
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copiar el código fuente
-COPY . ./
+# Copiar el código del servicio inventory
+COPY services/inventory/ ./services/inventory/
 
-# Compilar la aplicación
-RUN go build -o inventory
+# Establecer el directorio de trabajo al del servicio inventory
+WORKDIR /app/services/inventory
 
-# Ejecutar la aplicación
-CMD ["./inventory"]
+# Construir el binario del servicio inventory
+RUN go build -o inventory-service
+
+# Comando para ejecutar el servicio
+EXPOSE 8000
+CMD ["./inventory-service"]

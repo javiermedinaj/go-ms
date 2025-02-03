@@ -9,9 +9,10 @@ import (
 )
 
 func main() {
-	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
+	conn, err := amqp.Dial("amqp://user:password@rabbitmq:5672/")
+
 	if err != nil {
-		log.Fatalf("Failed to connect to Rabbit", err)
+		log.Fatalf("Failed to connect to Rabbit: %v", err)
 	}
 	defer conn.Close()
 
@@ -23,5 +24,5 @@ func main() {
 	})
 
 	log.Println("Notifications service is running on port 8082")
-	log.Fatal(http.ListenAndServe(":8082", nil))
+	log.Fatal(http.ListenAndServe(":8000", nil))
 }
